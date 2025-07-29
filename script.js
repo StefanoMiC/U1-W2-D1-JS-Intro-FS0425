@@ -89,8 +89,8 @@ console.log("sums a string with a num", sumStringAndNum);
 // Function --> pacchetti di istruzioni ripetibili
 
 // come chiedere a JavaScript di mostrarci l'effettivo TIPO del dato contenuto in una variabile ==> typeof
-console.log("Il tipo reale di fakeNumb è:", typeof fakeNumb);
-console.log("Il tipo reale di myNumber è:", typeof myNumber);
+console.log("Il tipo reale di fakeNumb è:", typeof fakeNumb); // string
+console.log("Il tipo reale di myNumber è:", typeof myNumber); // number
 
 // CONCATENAZIONE DI STRINGHE (+) - unire due o più stringhe in una unica risultante
 
@@ -98,11 +98,11 @@ let word1 = "Ciao";
 let word2 = "Bellissimi";
 let word3 = "Epicoders";
 
-let combinedWords = word1 + " " + word2 + " " + word3 + "!";
+let combinedWords = word1 + " " + word2 + " " + word3 + " " + myNumber + "!";
 console.log(combinedWords);
-// una stringa speciale formata da backticks ` --> alt + 96
+// una stringa speciale formata da backticks ` --> alt + 96 (la tilde ~ con alt + 126)
 // la stringa template mi permette di valutare valori dinamici dentro a ${} e riconosce i ritorni di linea (accapo)
-let combinedWordsTemplate = `${word1} ${word2} ${word3}!`;
+let combinedWordsTemplate = `${word1} ${word2} ${word3} ${myNumber}!`;
 console.log(combinedWordsTemplate);
 
 // COSTANTI
@@ -135,16 +135,17 @@ console.log(18 % 2); // 0, questa modalità può essere molto utile per scoprire
 // !=   --> disuguaglianza (debole)
 // !==  --> disuguaglianza (stretta) ✅
 
-console.log("18 è uguale a '18'?", 18 == "18"); // ❌
-console.log("18 è strettamente uguale a '18'?", 18 === "18"); // ✅ più consigliato
+console.log("18 è uguale a '18'?", 18 == "18"); // ❌ true (ci si aspetterebbe un false, perché i due operandi sono di diverso tipo)
+console.log("18 è strettamente uguale a '18'?", 18 === "18"); // ✅ false (esattamente come ci si aspetterebbe) più consigliato
 
-console.log("5 è diverso da '5'", 5 != "5");
-console.log("5 è strettamente diverso da '5'", 5 !== "5");
+console.log("5 è diverso da '5'", 5 != "5"); // false ❌
+console.log("5 è strettamente diverso da '5'", 5 !== "5"); // true ✅
 
-console.log("nomi diversi", "stefano" !== "mario");
+console.log("nomi diversi", "stefano" !== "mario"); // true
 
 console.log("la parola contenuta nella variabile è 'ciao'", word1 === "ciao"); // false
 console.log("la parola contenuta nella variabile è 'Ciao'", word1 === "Ciao"); // true
+console.log("la parola contenuta nella variabile è 'ciao'", word1.toLowerCase() === "ciao"); // true (perché abbiamo prima convertito in minuscolo la variabile)
 
 // COMPARAZIONE
 // >    --> maggiore
@@ -161,13 +162,13 @@ console.log("1 maggiore di 0", 1 > 0);
 // || --> basta una condizione true per ottenere true, tutte devono essere false perché restituisca false
 // ! --> inverte il risultato, es. !true ==> false
 
-const name = "Stefano";
+const name = prompt("come ti chiami?");
 const height = 179;
 const eyeColor = "green";
-const age = 19;
+const age = prompt("quanti anni hai?");
 
 console.log(name === "Stefano" && height > 160 && eyeColor === "green" && age >= 18);
-//                  true      &&       true   &&          true        &&     true  ==>  true
+//                   true      &&       true   &&          true        &&     true  ==>  true
 
 console.log(eyeColor === "blue-gray" || eyeColor === "blue" || eyeColor === "green");
 //                      false        ||          false      ||          true        ==>  true
@@ -179,5 +180,24 @@ console.log(name === "Stefano" && height > 160 && (eyeColor === "blue-gray" || e
 // quindi:
 //                  true       &&      true    &&  ( true )                                                                 &&     true     ==> true
 
+// SEMPLIFICANDO...
+const hasNiceEyes = eyeColor === "blue-gray" || eyeColor === "blue" || eyeColor === "green";
+
+console.log(name === "Stefano" && height > 160 && hasNiceEyes && age >= 18);
+
 // NOR
 console.log("il colore non è tra quelli esclusi", !(eyeColor === "red" || eyeColor === "brown" || eyeColor === "yellow"));
+//                                                  (           false  ||           false      ||           true        )  ==> !(true) ==> false
+
+// OPERATORE TERNARIO
+// sintassi:
+
+// condizione ? valore in caso true : valore in caso false
+
+// console.log(age >= 18 ? "ENTRA PURE" : "TORNA QUANDO SARAI MAGGIORENNE");
+
+const canUserEnter = age >= 18 ? "YES" : "NO";
+console.log("can user enter?", canUserEnter);
+
+const canMyFriendEnter = age >= 18 && (name === "Giovanni" || name === "Antonio" || name === "Stefano") ? "VAI FRA" : "BALZA";
+console.log("can fra enter?", canMyFriendEnter);
